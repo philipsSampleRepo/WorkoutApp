@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#4AF851</color>
+    <color name="accent">#32cb00</color>
+    <color name="purple_700">#4AF851</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="ripple">#D5D5D5</color>
+    <color name="button_ripple_black">#555353</color>
+    <color name="gray">#D4DEE7</color>
+    <color name="gray_text">#949191</color>
+    <color name="item_background_color">#C4C4C4</color>
+    <color name="item_finished_background_color">#51CD56</color>
+    <color name="finish_text_color">#80EB53</color>
+    <color name="light_green">#A0EB85</color>
+    <color name="white_lite_green">#0C46E81B</color>
+</resources>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="imageview_padding">4dp</dimen>
+    <dimen name="start_btn_size">150dp</dimen>
+    <dimen name="margin_top">108dp</dimen>
+    <dimen name="frame_size">100dp</dimen>
+    <dimen name="margin_top_frame">10dp</dimen>
+    <dimen name="progress_text_layout_size">60dp</dimen>
+    <dimen name="item_width">28dp</dimen>
+    <dimen name="item_margin">2dp</dimen>
+    <dimen name="item_padding">4dp</dimen>
+    <dimen name="end_text_size">35sp</dimen>
+    <dimen name="finish_vector_height_width">25dp</dimen>
+    <dimen name="bmi_dimensions">70dp</dimen>
+    <dimen name="button_radius_large">5dp</dimen>
+    <dimen name="button_radius_large_button">0dp</dimen>
+    <dimen name="radio_group_stroke">0.5dp</dimen>
+    <dimen name="dp_1_stroke">1dp</dimen>
+<!--    <item name="radio_group_stroke" type="dimen" format="float">0.5dp</item>-->
+</resources>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_logo">Application logo image</string>
+    <string name="get_ready">GET READY FOR</string>
+    <string name="start_exercise">Here you should start the exercise...</string>
+    <string name="start_exercise_after_interval">Some Exercise</string>
+    <string name="exercise_image_description">Exercise Image</string>
+    <string name="upcoming_lbl">Upcoming Exercise</string>
+    <string name="upcoming_exercise">Upcoming Exercise</string>
+    <string name="end_text">END</string>
+    <string name="congratz_txt">Congratulations!</string>
+    <string name="finish_txt_message">You have finished the workout.</string>
+    <string name="finish_btn_txt">FINISH</string>
+    <string name="dialog_question">Are you sure?</string>
+    <string name="dialog_description">This will stop your workout. You\'ve come this far, are you sure you want to quit?</string>
+    <string name="yes_btn_str">YES</string>
+    <string name="no_btn_str">NO</string>
+    <string name="bmi_string">BMI</string>
+    <string name="bmi_calculator_str">Calculator</string>
+    <string name="weight_hint">WEIGHT (in kg)</string>
+    <string name="height_hint">HEIGHT (in cm)</string>
+    <string name="your_bmi_lbl">YOUR BMI</string>
+    <string name="bmi_val_str">Normal</string>
+    <string name="calculate_str">CALCULATE</string>
+    <string name="bmi_error_message">Please enter valid values for height and weight.</string>
+    <string name="metic_str">METRIC UNITS</string>
+    <string name="us_str">US UNITS</string>
+    <string name="weight_hint_us">WEIGHT (in lbs)</string>
+    <string name="height_hint_feet">HEIGHT (in feet)</string>
+    <string name="height_hint_inches">HEIGHT (in inches)</string>
+    <string name="bmi_history_str">History</string>
+    <string name="bmi_value">BMI value</string>
+    <string name="bmi_description">BMI description</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="update_error">BMI value or BMI description cannot be empty.</string>
+    <string name="update_dialog_title">Update BMI Record</string>
+    <string name="successfully_saved">Sucessfully saved.</string>
+    <string name="delete_record">Delete Record</string>
+    <string name="delete_record_description">Are you sure you want to delete this record?</string>
+    <string name="successfully_deleted">Successfully Deleted the record.</string>
+    <string name="tv_no_history">History is not available.</string>
+</resources>
