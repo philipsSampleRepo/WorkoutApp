@@ -16,10 +16,10 @@ interface BMIDAO {
     fun getAllEntities(): LiveData<List<DBEntity>>
 
     @Query("SELECT * FROM bmi_info WHERE bmi_id =:bmiID")
-    fun getBMIEntity(bmiID: Int): DBEntity?
+    fun getBMIEntity(bmiID: Int): LiveData<DBEntity>?
 
     @Query("DELETE FROM bmi_info WHERE bmi_id = :bmiID")
-    fun deleteEntity(bmiID: Int):Int
+    fun deleteEntity(bmiID: Int): Int
 
     @Query("DELETE  FROM bmi_info")
     fun deleteAllEntities()

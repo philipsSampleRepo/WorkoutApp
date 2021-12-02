@@ -24,7 +24,7 @@ import kotlin.collections.ArrayList
 class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     private val TAG = ExerciseActivity::class.java.simpleName
-    private lateinit var exerciseBinding: ActivityExcerciseBinding
+    private var exerciseBinding: ActivityExcerciseBinding? = null
     private lateinit var view: View
     private var countDownTimer: CountDownTimer? = null
     private var countDownTimerExercise: CountDownTimer? = null
@@ -52,7 +52,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         exerciseBinding = ActivityExcerciseBinding.inflate(layoutInflater)
-        view = exerciseBinding.root
+        view = exerciseBinding!!.root
         setContentView(view)
         initTTS()
         init_Exercise_List()
@@ -68,9 +68,9 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private fun initAdapter() {
         exercise_List.let {
             exerciseAdapter = ExerciseStatusAdapter(it ?: ArrayList(), this)
-            exerciseBinding.recyclerview.layoutManager =
+            exerciseBinding?.recyclerview?.layoutManager =
                 LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-            exerciseBinding.recyclerview.adapter = exerciseAdapter
+            exerciseBinding?.recyclerview?.adapter = exerciseAdapter
         }
     }
 
@@ -82,18 +82,18 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     }
 
     private fun setToolbar() {
-        setSupportActionBar(exerciseBinding.exerciseTb)
+        setSupportActionBar(exerciseBinding?.exerciseTb)
         val supportActionBar: ActionBar? = supportActionBar
         supportActionBar?.let {
             it.setDisplayHomeAsUpEnabled(true)
         }
-        exerciseBinding.exerciseTb.setNavigationOnClickListener {
+        exerciseBinding?.exerciseTb?.setNavigationOnClickListener {
             customDialogForBackButton()
         }
     }
 
     private fun setNextExerciseDetails() {
-        exerciseBinding.tvUpcomingExercise.text = getNextExercise()
+        exerciseBinding?.tvUpcomingExercise?.text = getNextExercise()
     }
 
     private fun getNextExercise(): String {
@@ -110,25 +110,25 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     }
 
     private fun hideViewFl() {
-        exerciseBinding.flExercise.visibility = View.GONE
-        exerciseBinding.ivExercise.visibility = View.GONE
+        exerciseBinding?.flExercise?.visibility = View.GONE
+        exerciseBinding?.ivExercise?.visibility = View.GONE
     }
 
     private fun showViewFl() {
-        exerciseBinding.flExercise.visibility = View.VISIBLE
-        exerciseBinding.ivExercise.visibility = View.VISIBLE
+        exerciseBinding?.flExercise?.visibility = View.VISIBLE
+        exerciseBinding?.ivExercise?.visibility = View.VISIBLE
     }
 
     private fun hideResetProgressWidgets() {
-        exerciseBinding.flStart.visibility = View.GONE
-        exerciseBinding.tvUpcomingLbl.visibility = View.GONE
-        exerciseBinding.tvUpcomingExercise.visibility = View.GONE
+        exerciseBinding?.flStart?.visibility = View.GONE
+        exerciseBinding?.tvUpcomingLbl?.visibility = View.GONE
+        exerciseBinding?.tvUpcomingExercise?.visibility = View.GONE
     }
 
     private fun showResetProgressWidgets() {
-        exerciseBinding.flStart.visibility = View.VISIBLE
-        exerciseBinding.tvUpcomingLbl.visibility = View.VISIBLE
-        exerciseBinding.tvUpcomingExercise.visibility = View.VISIBLE
+        exerciseBinding?.flStart?.visibility = View.VISIBLE
+        exerciseBinding?.tvUpcomingLbl?.visibility = View.VISIBLE
+        exerciseBinding?.tvUpcomingExercise?.visibility = View.VISIBLE
     }
 
     private fun setRestProgress() {
@@ -136,16 +136,16 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         setNextExerciseDetails()
         hideViewFl()
 
-        exerciseBinding.tvMessage.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22.toFloat())
-        exerciseBinding.tvMessage.text = getText(R.string.get_ready)
-        exerciseBinding.progressBar.progress = progress_rest
+        exerciseBinding?.tvMessage?.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22.toFloat())
+        exerciseBinding?.tvMessage?.text = getText(R.string.get_ready)
+        exerciseBinding?.progressBar?.progress = progress_rest
 
         countDownTimer = object : CountDownTimer(TOTAL_TIME_INTERVAL_MILIS, COUNT_DOWN_INTERVAL) {
             override fun onTick(millisUntilFinished: Long) {
                 progress_rest++
                 val progress = TOTAL_TIME - progress_rest
-                exerciseBinding.progressBar.progress = progress
-                exerciseBinding.tvTimer.text = progress.toString()
+                exerciseBinding?.progressBar?.progress = progress
+                exerciseBinding?.tvTimer?.text = progress.toString()
             }
 
             override fun onFinish() {
@@ -160,16 +160,16 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private fun setExerciseProgress() {
         hideResetProgressWidgets()
         showViewFl()
-        exerciseBinding.tvMessage.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14.toFloat());
+        exerciseBinding?.tvMessage?.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14.toFloat());
         progress_rest = 0
-        exerciseBinding.progressBarExercise.progress = progress_rest
+        exerciseBinding?.progressBarExercise?.progress = progress_rest
         countDownTimerExercise =
             object : CountDownTimer(TOTAL_TIME_EXERCISE_MILIS, COUNT_DOWN_INTERVAL) {
                 override fun onTick(millisUntilFinished: Long) {
                     progress_rest++
                     val progress = TOTAL_TIME_EXERCISE - progress_rest
-                    exerciseBinding.progressBarExercise.progress = progress
-                    exerciseBinding.tvTimerExercise.text = progress.toString()
+                    exerciseBinding?.progressBarExercise?.progress = progress
+                    exerciseBinding?.tvTimerExercise?.text = progress.toString()
                 }
 
                 override fun onFinish() {
@@ -233,8 +233,8 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             if (current_position <= it.size - 1) {
                 val temp: Model? = it.get(current_position)
                 temp?.let {
-                    exerciseBinding.ivExercise.setImageResource(it.image)
-                    exerciseBinding.tvMessage.text =
+                    exerciseBinding?.ivExercise?.setImageResource(it.image)
+                    exerciseBinding?.tvMessage?.text =
                         it.name
                     speakout(it.name)
                     setExerciseProgress()
@@ -276,6 +276,9 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         if (mplayer != null) {
             mplayer?.stop()
             mplayer?.release()
+        }
+        if (exerciseBinding != null) {
+            exerciseBinding = null
         }
         super.onDestroy()
     }

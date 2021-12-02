@@ -11,6 +11,7 @@
         android:theme="@style/Theme.WorkoutApp">
         <activity
             android:name=".ui.HistoryActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity

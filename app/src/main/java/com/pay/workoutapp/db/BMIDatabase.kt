@@ -59,9 +59,9 @@ abstract class BMIDatabase : RoomDatabase() {
                     context.applicationContext,
                     BMIDatabase::class.java,
                     DATABASE_NAME
-                ).build()
+                ).fallbackToDestructiveMigration().build()
                 INSTANCE = instance
-                instance
+                return instance
             }
         }
     }

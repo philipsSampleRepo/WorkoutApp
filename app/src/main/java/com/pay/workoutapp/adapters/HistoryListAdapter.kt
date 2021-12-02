@@ -52,7 +52,7 @@ class HistoryListAdapter(
         return itemsList.size
     }
 
-    class HistoryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class HistoryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tv_date = HistoryItemListViewBinding.bind(view).tvDate
         val tv_bmi = HistoryItemListViewBinding.bind(view).tvBmiItemVal
         val tv_description = HistoryItemListViewBinding.bind(view).tvBmiItemDes

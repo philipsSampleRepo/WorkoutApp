@@ -19,17 +19,21 @@ class BMIRepository(private val bmidao: BMIDAO) {
         }
     }
 
-    val allNotes: LiveData<List<DBEntity>> = bmidao.getAllEntities()
+//    val allBMIObjs: LiveData<List<DBEntity>> = getAllBMIEntities()
+
+     fun getAllBMIEntities(): LiveData<List<DBEntity>> {
+        return bmidao.getAllEntities()
+    }
 
     // on below line we are creating an insert method
     // for adding the note to our database.
-     fun insertEntity(entity: DBEntity): Long {
+    suspend fun insertEntity(entity: DBEntity): Long {
         return bmidao.insertEntity(entity)
     }
 
     // on below line we are creating a delete method
     // for deleting our note from database.
-     fun delete(entityID: Int):Int {
+     fun delete(entityID: Int): Int {
         return bmidao.deleteEntity(entityID)
     }
 
@@ -43,7 +47,7 @@ class BMIRepository(private val bmidao: BMIDAO) {
         bmidao.deleteAllEntities()
     }
 
-     fun getBMIEntity(id: Int): DBEntity? {
+     fun getBMIEntity(id: Int): LiveData<DBEntity>? {
         return bmidao.getBMIEntity(id)
     }
 

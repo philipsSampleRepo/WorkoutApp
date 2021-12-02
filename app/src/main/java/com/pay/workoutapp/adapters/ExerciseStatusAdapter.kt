@@ -28,15 +28,19 @@ class ExerciseStatusAdapter(val items: ArrayList<Model>, val context: Context) :
         val model: Model = items[position]
         holder.tv_item.text = model.id.toString()
 
-        if (model.isSelected) {
-            holder.tv_item.setBackgroundResource(R.drawable.item_circular_color_gray_background_selected)
-            holder?.tv_item?.setTextColor(ContextCompat.getColor(context, R.color.black))
-        } else if (model.isCompleted) {
-            holder?.tv_item?.setBackgroundResource(R.drawable.item_circular_color_gray_background_finished)
-            holder?.tv_item?.setTextColor(ContextCompat.getColor(context, R.color.white))
-        } else {
-            holder?.tv_item?.setBackgroundResource(R.drawable.item_circular_color_gray_background)
-            holder?.tv_item?.setTextColor(ContextCompat.getColor(context, R.color.white))
+        when {
+            model.isSelected -> {
+                holder.tv_item.setBackgroundResource(R.drawable.item_circular_color_gray_background_selected)
+                holder?.tv_item?.setTextColor(ContextCompat.getColor(context, R.color.black))
+            }
+            model.isCompleted -> {
+                holder?.tv_item?.setBackgroundResource(R.drawable.item_circular_color_gray_background_finished)
+                holder?.tv_item?.setTextColor(ContextCompat.getColor(context, R.color.white))
+            }
+            else -> {
+                holder?.tv_item?.setBackgroundResource(R.drawable.item_circular_color_gray_background)
+                holder?.tv_item?.setTextColor(ContextCompat.getColor(context, R.color.white))
+            }
         }
     }
 

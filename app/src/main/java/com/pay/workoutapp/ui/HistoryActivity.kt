@@ -47,7 +47,7 @@ class HistoryActivity : AppCompatActivity(), BMIHistoryItemsListener {
 
     private fun initUpdateRecordDialogUI() {
         updateRecordCustomDialog =
-            Dialog(this@HistoryActivity, R.style.Theme_AppCompat_Light_Dialog_Alert)
+            Dialog(this@HistoryActivity, R.style.Dialog_Theme)
         updateRecordCustomDialogBinding = UpdateDialogInputBoxBinding.inflate(layoutInflater)
         val view: View = updateRecordCustomDialogBinding.root
         updateRecordCustomDialog.setContentView(view)
@@ -55,7 +55,7 @@ class HistoryActivity : AppCompatActivity(), BMIHistoryItemsListener {
 
     private fun initDeleteRecordDialog() {
         deleteRecordCustomDialog =
-            Dialog(this@HistoryActivity, R.style.Theme_AppCompat_Light_Dialog_Alert)
+            Dialog(this@HistoryActivity, R.style.Dialog_Theme)
         deleteRecordCustomDialogBinding = CustomAlertDialogBinding.inflate(layoutInflater)
         val view: View = deleteRecordCustomDialogBinding.root
         deleteRecordCustomDialog.setContentView(view)
@@ -89,17 +89,23 @@ class HistoryActivity : AppCompatActivity(), BMIHistoryItemsListener {
             ViewModelProvider.AndroidViewModelFactory.getInstance(application)
         )[BMIViewModel::class.java]
 
+        setupHistoryData()
         setupRecyclerView()
-        viewModel.allBMIEntities?.let {
-            it.observe(this, Observer { list ->
-                Log.i(TAG, "setupViewModel: ${list.size}")
-                if (list.isEmpty()) {
-                    historyActivity.tvNoHistory.visibility = View.VISIBLE
-                } else {
-                    historyActivity.tvNoHistory.visibility = View.GONE
-                    bmiItemsAdapter.setItems(list)
-                }
-            })
+    }
+
+    private fun setupHistoryData() {
+        lifecycleScope.launch {
+            viewModel.getAllBMIEntities()?.let {
+                it.observe(this@HistoryActivity, Observer { list ->
+                    Log.i(TAG, "setupViewModel: ${list.size}")
+                    if (list.isEmpty()) {
+                        historyActivity.tvNoHistory.visibility = View.VISIBLE
+                    } else {
+                        historyActivity.tvNoHistory.visibility = View.GONE
+                        bmiItemsAdapter.setItems(list)
+                    }
+                })
+            }
         }
     }
 
@@ -159,6 +165,7 @@ class HistoryActivity : AppCompatActivity(), BMIHistoryItemsListener {
             if (validateUpdateRecordEntry(bmi_val, bmi_des)) {
                 bmiItemsAdapter.updateItem(entity, position)
                 viewModel.updateEntity(bmi_val, bmi_des, entity.date, entity.bmi_id)
+                getUpdateEntity(entity)
             } else {
                 Toast.makeText(this@HistoryActivity, R.string.update_error, Toast.LENGTH_LONG)
                     .show()
@@ -177,5 +184,15 @@ class HistoryActivity : AppCompatActivity(), BMIHistoryItemsListener {
             return false
         }
         return true;
+    }
+
+    private fun getUpdateEntity(entity: DBEntity) {
+        lifecycleScope.launch {
+            viewModel.selectEntity(entity.bmi_id)?.observe(this@HistoryActivity, {
+                it?.let {
+                    Log.i(TAG, "customDialogForRecordUpdate: ${it.bmi_value}")
+                }
+            })
+        }
     }
 }
